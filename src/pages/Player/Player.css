@@ -1,0 +1,57 @@
+.player-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  cursor: pointer;
+}
+
+iframe {
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.player-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.watchlist-btn {
+  padding: 6px 12px;
+  background-color: rgba(109,109,110,0.7);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.watchlist-btn:hover {
+  background-color: rgba(109,109,110,0.9);
+}
+
+.recommendations {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.recommendations h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}

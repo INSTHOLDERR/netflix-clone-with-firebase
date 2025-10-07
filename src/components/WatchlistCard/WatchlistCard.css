@@ -1,0 +1,40 @@
+.watchlist-card {
+  background-color: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.watchlist-card:hover {
+  transform: scale(1.05);
+}
+
+.watchlist-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.watchlist-card-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.watchlist-card-info h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.remove-btn {
+  background-color: #e50914;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #f40612;
+}
