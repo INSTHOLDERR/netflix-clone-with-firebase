@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import logo from "../../assets/logo.png";
 import { login, signup } from "../../firebase";
-import netflix_spinner from '../../assets/netflix_spinner.gif';
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; // Icons for tick and cross
+import netflix_spinner from "../../assets/netflix_spinner.gif";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
   const [signState, setSignState] = useState("Sign In");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,19 +20,34 @@ const Login = () => {
 
   const passwordsMatch = password === confirmPassword && password.length > 0;
 
+  // Redirect to home if already logged in (login or signup)
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/"); // Go to Home page
+    }
+  }, [currentUser, navigate]);
+
   const user_auth = async (event) => {
     event.preventDefault();
+
+    // Check passwords match for signup
     if (signState === "Sign Up" && !passwordsMatch) {
       alert("Passwords do not match!");
       return;
     }
 
     setLoading(true);
-    if (signState === "Sign In") {
-      await login(email, password);
-    } else {
-      await signup(name, email, password);
+
+    try {
+      if (signState === "Sign In") {
+        await login(email, password);
+      } else {
+        await signup(name, email, password);
+      }
+    } catch (error) {
+      console.error("Authentication Error:", error);
     }
+
     setLoading(false);
   };
 
@@ -62,6 +82,7 @@ const Login = () => {
             name="email"
             required
           />
+
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -71,7 +92,6 @@ const Login = () => {
             required
           />
 
-          {/* Confirm Password for Sign Up */}
           {signState === "Sign Up" && (
             <div className="password-check-container">
               <input
